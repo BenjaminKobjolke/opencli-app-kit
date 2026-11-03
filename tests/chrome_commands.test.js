@@ -44,4 +44,18 @@ describe('Chrome commands', () => {
     expect(spawned[0][1]).toContain('--load-extension=extension');
     expect(spawned[0][1]).toContain('https://example.test/');
   });
+
+  test('launches Chrome without a page when no start URL is given', () => {
+    const spawned = [];
+    __setChromeDepsForTest({
+      existsSync: () => true,
+      mkdirSync: () => {},
+      spawn: (...args) => { spawned.push(args); return { unref() {} }; },
+      resolveOpenCliPaths: () => ({ extensionPath: 'extension' }),
+      stdout: { write() {} }
+    });
+
+    expect(runLaunch({ appName: 'sample-app' })).toBe(0);
+    expect(spawned[0][1]).toEqual([expect.stringMatching(/^--user-data-dir=/), '--load-extension=extension']);
+  });
 });

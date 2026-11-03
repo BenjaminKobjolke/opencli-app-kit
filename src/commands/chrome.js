@@ -72,12 +72,14 @@ export function runLaunch({ appName, startUrl }) {
   } else if (!IS_COMPILED) {
     writeStdout('Note: opencli extension dir not found on disk; install the OpenCLI extension in Chrome manually.');
   }
-  args.push(startUrl);
+  // Apps whose commands open their own bridge tab omit startUrl, so the site is not opened twice.
+  if (startUrl) args.push(startUrl);
 
   spawn(executable, args, { detached: true, stdio: 'ignore' }).unref();
+  const loginStep = startUrl ? `log into ${new URL(startUrl).origin} in that window if asked, then ` : '';
   writeStdout(
     `Launched ${executable} with profile ${profileDir}\n` +
-    `Next: log into ${new URL(startUrl).origin} in that window if asked, then run \`${appName} setup\` to check the Browser Bridge connection and extension.`
+    `Next: ${loginStep}run \`${appName} setup\` to check the Browser Bridge connection and extension.`
   );
   return EXIT_CODE.SUCCESS;
 }
