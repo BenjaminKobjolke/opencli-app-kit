@@ -1,0 +1,4 @@
+# Keep the graph focused on first-party source under src/.
+/*/
+!/src/
+!/src/**
