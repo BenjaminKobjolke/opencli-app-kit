@@ -2,6 +2,7 @@ import { existsSync, mkdirSync, readFileSync, writeFileSync } from 'node:fs';
 import { homedir } from 'node:os';
 import { dirname, join } from 'node:path';
 import { AppError, ERROR_CODE } from './errors.js';
+import { appEnvPrefix } from './app_env.js';
 
 function defaultChromeExecutable() {
   if (process.platform === 'darwin') {
@@ -15,7 +16,7 @@ function defaultChromeExecutable() {
 
 export function createSettings(appName) {
   const appDirectory = join(homedir(), `.${appName}`);
-  const path = join(appDirectory, 'settings.json');
+  const path = process.env[`${appEnvPrefix(appName)}_SETTINGS`] || join(appDirectory, 'settings.json');
 
   function loadSettings() {
     if (!existsSync(path)) return {};

@@ -3,15 +3,12 @@
 import { readdirSync, readFileSync } from 'node:fs';
 import { homedir } from 'node:os';
 import { join } from 'node:path';
+import { appEnvPrefix } from './app_env.js';
 
 const MIN_VERSION_FILE_NAME = 'min_exe_version.txt';
 const PLUGIN_ROOT_ENV_VAR = 'CLAUDE_PLUGIN_ROOT';
 const CONFIG_DIR_ENV_VAR = 'CLAUDE_CONFIG_DIR';
 const SEMVER_PATTERN = /^\d+\.\d+\.\d+$/;
-
-function appEnvPrefix(appName) {
-  return appName.toUpperCase().replace(/[^A-Z0-9]+/g, '_');
-}
 
 export function compareSemver(leftVersion, rightVersion) {
   const left = leftVersion.split('.').map(Number);

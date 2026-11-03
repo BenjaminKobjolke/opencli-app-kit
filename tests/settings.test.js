@@ -42,6 +42,21 @@ describe('app settings', () => {
     expect(() => settings.loadSettings()).toThrow(expect.objectContaining({ code: ERROR_CODE.CONFIG_INVALID }));
   });
 
+  test('reads and writes the file named by <APP>_SETTINGS when it is set', () => {
+    const overridePath = join(fixtureHome, 'custom', 'settings.json');
+    process.env.SAMPLE_APP_SETTINGS = overridePath;
+    try {
+      const settings = createSettings('sample-app');
+      expect(settings.settingsPath()).toBe(overridePath);
+      settings.saveSettings({ logLevel: 'info' });
+      expect(createSettings('sample-app').loadSettings()).toEqual({ logLevel: 'info' });
+      expect(settings.resolveChrome().profileDir).toBe(join(fixtureHome, '.sample-app', 'chrome-profile'));
+    } finally {
+      delete process.env.SAMPLE_APP_SETTINGS;
+    }
+    expect(createSettings('sample-app').settingsPath()).toBe(join(fixtureHome, '.sample-app', 'settings.json'));
+  });
+
   test('resolves Chrome and profile values from app settings', () => {
     const settings = createSettings('sample-app');
     settings.saveSettings({ chrome: { executable: 'chrome', profileDir: 'profile', bridgeProfile: 'context-1' } });

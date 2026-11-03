@@ -84,4 +84,6 @@ async function runCli() {
 await runMain(runCli);
 ```
 
+`createSettings(appName)` reads `~/.<appName>/settings.json`. Set `<APP>_SETTINGS` (the app name upper-cased, non-alphanumerics as `_`, e.g. `POSTBANKCLI_SETTINGS`) to an absolute file path to use another settings file; the Chrome profile default stays in `~/.<appName>/chrome-profile`.
+
 Use `createSettings(appName)` and the command modules where they fit the consuming app. The library supplies shared behavior; apps remain responsible for their own routing, command text, and application-specific defaults.

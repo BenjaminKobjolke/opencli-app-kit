@@ -3,6 +3,7 @@ import { existsSync } from 'node:fs';
 import { dirname, resolve } from 'node:path';
 import { fileURLToPath, pathToFileURL } from 'node:url';
 import { AppError, ERROR_CODE } from './errors.js';
+import { appEnvPrefix } from './app_env.js';
 
 const MODULE_DIRECTORY = dirname(fileURLToPath(import.meta.url));
 const DEFAULT_OPENCLI_SEGMENTS = ['.omx', 'reference', 'opencli'];
@@ -11,10 +12,6 @@ export const IS_COMPILED = typeof Bun !== 'undefined'
   && (Bun.main.includes('~BUN') || Bun.main.includes('$bunfs'));
 
 let execRunner = (command, args, options) => spawnSync(command, args, options);
-
-function appEnvPrefix(appName) {
-  return appName.toUpperCase().replace(/[^A-Z0-9]+/g, '_');
-}
 
 export function openCliEnvNames(appName) {
   const prefix = appEnvPrefix(appName);
