@@ -1,0 +1,14 @@
+{
+  "files": {
+    "TICKETS_WATCHER_COMMANDS.md": 3
+  },
+  "command_check_scripts": [],
+  "analysis_commands": [],
+  "analysis_commands_seen": {
+    "scripts": [],
+    "tests": false
+  },
+  "analysis_tests_answered": true,
+  "analysis_code_quality_answered": true,
+  "project_id": 12388
+}
