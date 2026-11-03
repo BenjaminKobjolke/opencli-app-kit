@@ -26,6 +26,8 @@ mkdir .omx\reference
 mklink /J .omx\reference\opencli-app-kit D:\GIT\BenjaminKobjolke\opencli-app-kit
 ```
 
+In the app's `code_analysis_rules.json`, exclude `.omx` with `global_exclude_paths` and add `.omx/**` to `pmd_duplicates.exclude_patterns.javascript`; otherwise analysis follows the junction into this library and its upstream OpenCLI reference.
+
 The OpenCLI junction belongs inside this library; the `opencli-app-kit` junction belongs inside each app. Bun resolves the app-kit junction to this checkout, so the literal OpenCLI and daemon imports in the library bundle from `.omx\reference\opencli` here.
 
 Set up the package and run its checks with:
