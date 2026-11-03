@@ -1,6 +1,9 @@
 {
   "fail_on": "warning",
   "log_level": "all",
+  "global_exclude_paths": [
+    ".omx"
+  ],
   "max_lines_per_file": {
     "enabled": true,
     "warning": 300,
@@ -15,7 +18,8 @@
         "dist/**",
         "build/**",
         "coverage/**",
-        "code_analysis_results/**"
+        "code_analysis_results/**",
+        ".omx/**"
       ]
     }
   },
