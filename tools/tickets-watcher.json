@@ -9,11 +9,15 @@
     "analyze_code_config.example.bat"
   ],
   "analysis_commands": [
-    "tools\\analyze_changed_and_new_files.bat"
+    "tools\\analyze_changed_and_new_files.bat",
+    "tools\\analyze_code.bat"
   ],
   "analysis_commands_seen": {
     "scripts": [
-      "analyze_changed_and_new_files.bat"
+      "analyze_changed_and_new_files.bat",
+      "analyze_code.bat",
+      "analyze_code_config.bat",
+      "analyze_code_config.example.bat"
     ],
     "tests": false
   },
