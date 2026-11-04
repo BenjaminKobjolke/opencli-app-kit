@@ -1,7 +1,7 @@
 {
   "rules": {
     "COMMON_RULES.md": 16,
-    "JAVASCRIPT_RULES.md": 1,
+    "JAVASCRIPT_RULES.md": 2,
     "implementation_flow_addons/graphify.md": 15,
     "IMPLEMENTATION_FLOW.md": 25,
     "implementation_flow_addons/graphify_flow.md": 2
